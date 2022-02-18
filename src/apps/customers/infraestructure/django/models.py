@@ -13,7 +13,6 @@ class CustomerDjangoModel( models.Model):
     email = models.EmailField(max_length=50, null=True, blank=True)
     desc = models.CharField(max_length=200)
     obs = models.TextField(null=True, blank=True)
-
     
     def to_domain(self) -> domain_customer:
         return domain_customer(
@@ -42,5 +41,7 @@ class AddressDjangoModel(models.Model):
             number=self.number,
             cp=self.cp,
             poblation=self.poblation,
-            desc=self.desc
+            desc=self.desc,
+            obs=self.obs,
+            customer=self.customer,
         )

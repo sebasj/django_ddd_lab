@@ -10,26 +10,6 @@ class CustomerExistsException(Exception):
     pass
 
 
-class Address:
-    def __init__(
-        self,
-        street: str,
-        number: str,
-        cp: str,
-        poblation: str,
-        desc: str
-    ):
-        self.street = street
-        self.number = number
-        self.cp = cp
-        self.poblation = poblation
-        self.desc = desc
-
-    def __repr__(self) -> str:
-        return f'{self.desc}; {self.poblation}; {self.street}; {self.cp} '
-
-    def add_obs(self, obs: str):
-        self.obs += obs
 
 
 class Customer:
@@ -73,12 +53,58 @@ class Customer:
         _aux.append(obs)
         self.obs += ''.join(obs)
 
-    def add_address(
-        self, 
+    @staticmethod
+    def create(
+        name: str,
+        phone_number: str,
+        email: str,
+        vat_id: str,
+    ):
+        return Customer(
+            name=name,
+            phone_number=phone_number,
+            email=email,
+            vat_id=vat_id,
+        )
+
+
+class Address:
+    def __init__(
+        self,
+        customer: Customer,
         street: str,
         number: str,
         cp: str,
         poblation: str,
         desc: str
     ):
-        self.add_address = Address(street=street, number=number, cp=cp, poblation=poblation, desc=desc)
+        self.customer = customer,
+        self.street = street
+        self.number = number
+        self.cp = cp
+        self.poblation = poblation
+        self.desc = desc
+
+    def __repr__(self) -> str:
+        return f'{self.customer}; {self.desc}; {self.poblation}; {self.street}; {self.cp} '
+
+    def add_obs(self, obs: str):
+        self.obs += obs
+
+    @staticmethod
+    def create(
+        customer: Customer,
+        street: str,
+        number: str,
+        cp: str,
+        poblation: str,
+        desc: str
+    ):
+        return Address(
+            customer=customer,
+            street=street,
+            number=number,
+            cp=cp,
+            poblation=poblation,
+            desc=desc
+        )

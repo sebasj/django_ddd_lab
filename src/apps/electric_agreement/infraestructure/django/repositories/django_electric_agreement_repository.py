@@ -7,7 +7,7 @@ from domain.model import ElectricAgreement
 from domain.repositories.agreement_repository import ElectricAgreementRepository
 from infraestructure.django.persistance.django_models import ElectricAgreementDjangoModel, ElectricAgreementHolderDjangoModel
 from project.src.apps.customers.infraestructure.django.persistence.django_models import CustomerDjangoModel
-from project.src.apps.customers.infraestructure.django.repositories.django_customer_repository import CustomerDjangoRepository
+from project.src.apps.customers.infraestructure.django.repositories import CustomerDjangoRepository
 
 
 class ElectricAgreementDjangoRepository(ElectricAgreementRepository):
@@ -20,9 +20,8 @@ class ElectricAgreementDjangoRepository(ElectricAgreementRepository):
         result = [i.to_domain() for i in items]
         return result
 
-    def save(self, agreement: ElectricAgreement):
-        
-        holder = CustomerDjangoRepository.get_by_id(agreement.holder.id)
+    def save(self, agreement: ElectricAgreement):    
+        holder = CustomerDjangoRepository.get_by_id(agreement.holder.id).holder
         payer = 
         try:
             object = ElectricAgreementDjangoModel.objects.get(id=agreement.id)

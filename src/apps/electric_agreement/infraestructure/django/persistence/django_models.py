@@ -15,7 +15,7 @@ class ElectricAgreementDjangoModel(models.Model):
     billing_address = models.ForeignKey(AddressDjangoModel, blank=True, null=True)
     start_date = models.DateField()
     end_date = models.DateField(null=True, blank=True)
-    holders = models.ForeignKey(ElectricAgreementHolderDjangoModel, blank=True, null=True, )
+    holders = models.ForeignKey(ElectricAgreementHolderDjangoModel, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def to_domain(self) -> domain_agreement:

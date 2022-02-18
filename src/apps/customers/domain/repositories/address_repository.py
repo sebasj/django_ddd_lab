@@ -15,6 +15,10 @@ class AddressRepository(abc.ABC):
         raise NotImplementedError
     
     @abs.abstractmethod
+    def filter_by_customer(self, id: int) -> Address:
+        raise NotImplementedError
+
+    @abs.abstractmethod
     def save(self, address: Address):
         raise NotImplementedError
     
