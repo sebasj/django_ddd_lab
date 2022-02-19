@@ -2,19 +2,20 @@ import abc
 import uuid
 from typing import List
 
-from domain.model import Customer
+from apps.customers.domain.models import Customer
 
 
 class CustomerRepository(abc.ABC):
-    @abs.abstractmethod
+    @abc.abstractmethod
     def get_by_id(self, id: uuid.uuid4) -> Customer:
         raise NotImplementedError
 
     
-    @abs.abstractmethod
-    def save(self, customer: Customer):
+    @abc.abstractmethod
+    def save(self, customer: Customer) -> Customer:
         raise NotImplementedError
     
-    @abs.abstractmethod
-    def list(self) -> List(Customer):
+
+    @abc.abstractmethod
+    def list(self) -> List[Customer]:
         raise NotImplementedError

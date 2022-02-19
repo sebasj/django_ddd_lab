@@ -6,3 +6,5 @@ class CustomerSerializer(serializers.Serializer):
     phone_number = serializers.CharField()
     email = serializers.CharField()
     vat_id = serializers.CharField()
+    created_at = serializers.CharField(required=False)
+    contracts = serializers.ListField(required=False)

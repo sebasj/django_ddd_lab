@@ -2,23 +2,23 @@ import abc
 
 from typing import List
 
-from domain.model import Address
+from apps.customers.domain.models import Address
 
 
 class AddressRepository(abc.ABC):
-    @abs.abstractmethod
+    @abc.abstractmethod
     def filter_by_street(self, street: str) -> List[Address]:
         raise NotImplementedError
 
-    @abs.abstractmethod
+    @abc.abstractmethod
     def filter_by_cp(self, cp: str) -> List[Address]:
         raise NotImplementedError
     
-    @abs.abstractmethod
+    @abc.abstractmethod
     def filter_by_customer(self, id: int) -> Address:
         raise NotImplementedError
 
-    @abs.abstractmethod
+    @abc.abstractmethod
     def save(self, address: Address):
         raise NotImplementedError
     

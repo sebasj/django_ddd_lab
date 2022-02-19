@@ -1,9 +1,8 @@
 
 from django.db import models
 
-from customers.domain.model import Customer as domain_customer
-from customers.domain.model import Address as domain_address
-
+from apps.customers.domain.models import Customer as domain_customer
+from apps.customers.domain.models import Address as domain_address
 
 
 class CustomerDjangoModel( models.Model):
@@ -11,7 +10,6 @@ class CustomerDjangoModel( models.Model):
     name = models.CharField(max_length=75)
     phone_number = models.CharField(max_length=12)
     email = models.EmailField(max_length=50, null=True, blank=True)
-    desc = models.CharField(max_length=200)
     obs = models.TextField(null=True, blank=True)
     
     def to_domain(self) -> domain_customer:
@@ -32,7 +30,7 @@ class AddressDjangoModel(models.Model):
     poblation = models.CharField(max_length=50)
     desc = models.CharField(max_length=200)
     obs = models.TextField(null=True, blank=True)
-    customer = models.ForeignKey(CustomerDjangoModel)
+    customer = models.ForeignKey(CustomerDjangoModel, on_delete=models.DO_NOTHING)
 
     def to_domain(self) -> domain_address:
         return domain_address(

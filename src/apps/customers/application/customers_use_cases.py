@@ -1,17 +1,17 @@
 import uuid
-from typing import Optional, List, Set
+from typing import List
 
-from customers.domain.model import Customer
-from customers.domain.repositories.customer_repository import CustomerRepository
+from apps.customers.domain.models import Customer
+from apps.customers.domain.repositories.customer_repository import CustomerRepository
 
 
 class CustomerUseCaseMixin:
     def __init__(self, customers_repository: CustomerRepository):
-        self.customers_repository = customer_repository
+        self.customers_repository = customers_repository
 
 
 class CustomersListUseCase(CustomerUseCaseMixin):
-    def execute(self) -> List(Customer):
+    def execute(self) -> List[Customer]:
         customers = self.customers_repository.list()
         return customers
 
@@ -22,4 +22,10 @@ class RetrieveCustomerUseCase(CustomerUseCaseMixin):
         customer = self.customers_repository.get_by_id(id=customer_id)
         return customer
 
-    
+
+class CustomerCreateUseCase(CustomerUseCaseMixin):    
+    def create(self, name, phone_number, email, vat_id) -> Customer:
+        customer = Customer(
+            name=name, phone_number=phone_number, email=email, vat_id=vat_id
+        )
+        return self.customers_repository.save(customer=customer)

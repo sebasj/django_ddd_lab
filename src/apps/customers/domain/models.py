@@ -10,8 +10,6 @@ class CustomerExistsException(Exception):
     pass
 
 
-
-
 class Customer:
     def __init__(
         self,
@@ -19,6 +17,7 @@ class Customer:
         phone_number: str,
         email: str,
         vat_id: str,
+        obs: str = ''
     ): 
         self.name = name
         self.phone_number = phone_number
@@ -28,18 +27,17 @@ class Customer:
         self.deleted = False
         self.active = False    
         self.created_at = datetime.datetime.now()
+        self.obs = ''
+
 
     def __repr__(self) -> str:
-        return f'{self.name}; {self.vat_id}; {self.phone_number}; {self.email} '
+        return f'{self.name}; {self.vat_id}; {self.phone_number}; {self.email}; {self.active}; {self.created_at} '
 
     def __eq__(self, other: object) -> bool:
         if not isinstance(Customer):
             return False
         return self.vat_id == other.vat_id
     
-    def add_obs(self, obs: str):
-        self.obs += obs
-
     def set_active(self):
         self.active = True
     
@@ -52,20 +50,6 @@ class Customer:
         _aux.append(datetime.datetime.now())
         _aux.append(obs)
         self.obs += ''.join(obs)
-
-    @staticmethod
-    def create(
-        name: str,
-        phone_number: str,
-        email: str,
-        vat_id: str,
-    ):
-        return Customer(
-            name=name,
-            phone_number=phone_number,
-            email=email,
-            vat_id=vat_id,
-        )
 
 
 class Address:
