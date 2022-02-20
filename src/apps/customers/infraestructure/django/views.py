@@ -4,8 +4,8 @@ from rest_framework.response import Response
 
 from customers.application import customers_use_cases 
 
-from customers.infraestructure.django.serializers import CustomerSerializer
 from customers.infraestructure.django.repositories import CustomerDjangoRepository
+from customers.infraestructure.django.serializers import CustomerSerializer
 
 
 class CustomersListAPIView(APIView):
