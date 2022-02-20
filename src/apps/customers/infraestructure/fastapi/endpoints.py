@@ -18,6 +18,9 @@ async def customers_list_api_view():
     return customers
 
 
+"""
+When testing post method with postman: body: raw -> plain json
+"""
 @router.post("/add")
 async def customers_list_api_view(customer: CustomerSerializer):
     use_case = customers_use_cases.CustomerCreateUseCase(customers_repository=CustomerFastAPIRepository())
