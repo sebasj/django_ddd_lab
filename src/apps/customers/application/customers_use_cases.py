@@ -4,6 +4,8 @@ from typing import List
 from apps.customers.domain.models import Customer
 from apps.customers.domain.repositories.customer_repository import CustomerRepository
 
+from apps.customers.domain import events
+from apps.customers.application import message_bus
 
 class CustomerUseCaseMixin:
     def __init__(self, customers_repository: CustomerRepository):
@@ -25,7 +27,8 @@ class RetrieveCustomerUseCase(CustomerUseCaseMixin):
 
 class CustomerCreateUseCase(CustomerUseCaseMixin):    
     def create(self, name, phone_number, email, vat_id) -> Customer:
-        customer = Customer(
+        create_customer_event = events.NewCustomerCreated(
             name=name, phone_number=phone_number, email=email, vat_id=vat_id
         )
+        message_bus.handle(create_customer_event, self.customers_repository)
         return self.customers_repository.save(customer=customer)

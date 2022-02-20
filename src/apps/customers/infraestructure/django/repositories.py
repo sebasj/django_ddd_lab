@@ -11,10 +11,13 @@ from customers.infraestructure.django.models import CustomerDjangoModel, Address
 
 class CustomerDjangoRepository(CustomerRepository):
     
-    def get_by_id(self, id: uuid.uuid4) -> Customer:
+    def __init__(self):
+        super().__init__() # Initializes CustomerRepository.seen attribute
+
+    def _get_by_id(self, id: uuid.uuid4) -> Customer:
         return CustomerDjangoModel.objects.get(id=id).to_domain()
 
-    def save(self, customer: Customer) -> Customer:
+    def _save(self, customer: Customer) -> Customer:
         try:
             object = CustomerDjangoModel.objects.get(vat_id=customer.vat_id)
         except CustomerDjangoModel.DoesNotExist:

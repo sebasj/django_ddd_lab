@@ -28,7 +28,7 @@ class Customer:
         self.active = False    
         self.created_at = datetime.datetime.now()
         self.obs = ''
-
+        self.events = []
 
     def __repr__(self) -> str:
         return f'{self.name}; {self.vat_id}; {self.phone_number}; {self.email}; {self.active}; {self.created_at} '
