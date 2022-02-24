@@ -17,6 +17,7 @@ import main.settings_local as properties
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = getattr(properties, 'base_dir', Path(__file__).resolve().parent.parent)
+# add local settings file add: sys.path.append(str(base_dir / 'apps'))
 
 
 # Quick-start development settings - unsuitable for production
